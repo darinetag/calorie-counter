@@ -14,9 +14,9 @@ function isInvalidInput(str) {
   const regex = /\d+e\d+/i;
   return str.match(regex);
 }
+
 function addEntry() {
-  const targetId = "#" + entryDropdown.value;
   const targetInputContainer = document.querySelector(
-    `${targetId} +  .input-container`
+    `#${entryDropdown.value} .input-container`
   );
 }
