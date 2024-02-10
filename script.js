@@ -10,6 +10,7 @@ function cleanInputString(str) {
   const regex = /[+-\s]/g;
   return str.replace(regex, "");
 }
+
 function isInvalidInput(str) {
   const regex = /\d+e\d+/i;
   return str.match(regex);
@@ -25,20 +26,29 @@ function addEntry() {
   <label for="${entryDropdown.value}-${entryNumber}-name">Entry ${entryNumber} Name</label>
   <input type="text" id="${entryDropdown.value}-${entryNumber}-name" placeholder="Name" />
   <label for="${entryDropdown.value}-${entryNumber}-calories">Entry ${entryNumber} Calories</label>
-  <input type="number" min="0" placeholder="Calories" id="${entryDropdown.value}-${entryNumber}-calories"></input>`;
+  <input
+    type="number"
+    min="0"
+    id="${entryDropdown.value}-${entryNumber}-calories"
+    placeholder="Calories"
+  />`;
   targetInputContainer.insertAdjacentHTML("beforeend", HTMLString);
 }
-
 function getCaloriesFromInputs(list) {
   let calories = 0;
-  for (let i = 0; i < list.length; i++) {
-    const currVal = cleanInputString(list[i].value);
-    const isInvalidInput = isInvalidInput(currVal);
+
+  for (const item of list) {
+    const currVal = cleanInputString(item.value);
+    const invalidInputMatch = isInvalidInput(currVal);
+
     if (invalidInputMatch) {
       alert(`Invalid Input: ${invalidInputMatch[0]}`);
       isError = true;
       return null;
     }
+    calories += Number(currVal);
   }
+  return calories;
 }
+
 addEntryButton.addEventListener("click", addEntry);
