@@ -34,24 +34,27 @@ function addEntry() {
   />`;
   targetInputContainer.insertAdjacentHTML("beforeend", HTMLString);
 }
+
 function calculateCalories(e) {
   e.preventDefault();
   isError = false;
+
   const breakfastNumberInputs = document.querySelectorAll(
-    `#breakfast input[type=number]`
+    "#breakfast input[type=number]"
   );
   const lunchNumberInputs = document.querySelectorAll(
-    `#lunch input[type=number]`
+    "#lunch input[type=number]"
   );
   const dinnerNumberInputs = document.querySelectorAll(
-    `#dinner input[type=number]`
+    "#dinner input[type=number]"
   );
   const snacksNumberInputs = document.querySelectorAll(
-    `#snacks input[type=number]`
+    "#snacks input[type=number]"
   );
   const exerciseNumberInputs = document.querySelectorAll(
-    `#exercise input[type=number]`
+    "#exercise input[type=number]"
   );
+
   const breakfastCalories = getCaloriesFromInputs(breakfastNumberInputs);
   const lunchCalories = getCaloriesFromInputs(lunchNumberInputs);
   const dinnerCalories = getCaloriesFromInputs(dinnerNumberInputs);
@@ -62,6 +65,7 @@ function calculateCalories(e) {
   if (isError) {
     return;
   }
+
   const consumedCalories =
     breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
   const remainingCalories =
@@ -75,10 +79,11 @@ function calculateCalories(e) {
   <p>${budgetCalories} Calories Budgeted</p>
   <p>${consumedCalories} Calories Consumed</p>
   <p>${exerciseCalories} Calories Burned</p>
-  
   `;
+
   output.classList.remove("hide");
 }
+
 function getCaloriesFromInputs(list) {
   let calories = 0;
 
@@ -95,5 +100,8 @@ function getCaloriesFromInputs(list) {
   }
   return calories;
 }
-
+function clearForm() {
+  const inputContainers = document.querySelectorAll(".input-container");
+}
 addEntryButton.addEventListener("click", addEntry);
+calorieCounter.addEventListener("submit", calculateCalories);
